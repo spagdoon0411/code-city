@@ -1,10 +1,10 @@
 class Building {
 
     // How sensitive is a building's width to its number of fields?
-    static int WIDTH_SCALING = 30;
+    static int WIDTH_SCALING = 3;
 
     // How sensitive is a building's height to its number of methods?
-    static int HEIGHT_SCALING = 30;
+    static int HEIGHT_SCALING = 3;
 
     String className;
     private int methods; // Based on number of methods

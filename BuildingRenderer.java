@@ -1,20 +1,20 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /* Displays Buildings onto screen
  *  By: Eric Berber 
  */
 public class BuildingRenderer extends JComponent {
-    // Change consts as needed
+
     private static int BUILDING_OFFSET_X = 50;
     private static int BUILDING_OFFSET_Y = 200;
     private static int RENDER_START_X = 100;
-    private static int RENDER_START_Y = 100;
-    public Map<String, ArrayList<Building>> buildings;
-    public BuildingRenderer(Map<String, ArrayList<Building>> buildings){
+    private static int RENDER_START_Y = 300;
+    public Map<String, List<Building>> buildings;
+    public BuildingRenderer(Map<String, List<Building>> buildings){
         this.buildings = buildings;
     }   
 
@@ -33,8 +33,8 @@ public class BuildingRenderer extends JComponent {
 
                 g.setColor(Color.black);
                 g.drawString(building.getClassName(), posX , posY + 20); //Arbritrary Y offsets
-                g.drawString("F:" + Integer.toString(building.getMethods()), posX , posY + 40);
-                g.drawString("M:" + Integer.toString(building.getFields()), posX , posY + 60);
+                g.drawString("F:" + building.getMethods(), posX , posY + 40);
+                g.drawString("M:" + building.getFields(), posX , posY + 60);
 
                 posX += building.getWidth() + BUILDING_OFFSET_X;
             }
