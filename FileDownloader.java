@@ -13,8 +13,43 @@ import java.nio.file.*;
 */
 public class FileDownloader {
 
-    public void downloadFromUrl(String url){
-        url = "https://api.github.com/repos/" + url.substring(19);
+    String tempDirName;
+
+    private File folder;
+
+    private String remoteURL;
+
+    private String folderDownloadPath;
+
+    /**
+     * Fetches the files from the remote GitHub repo and places them in a directory
+     * defined by the user. Creates the directory if it does not exist.
+     * @param remoteURL
+     * @param directoryPath
+     */
+    public FileDownloader(String remoteURL, String directoryPath) {
+        this.folderDownloadPath = directoryPath;
+        this.remoteURL = remoteURL;
+
+        // Make a folder for download if it doesn't exist
+        // String folderDownloadPath = System.getProperty("user.home") + File.separator + "Downloads";
+        Path folderPath = Path.of(folderDownloadPath);
+        if (!Files.exists(folderPath)) {
+            try {
+                Files.createDirectories(folderPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+
+        this.folder = new File(directoryPath);
+
+        this.downloadFromUrl();
+    }
+
+    private void downloadFromUrl(){
+        String url = "https://api.github.com/repos/" + this.remoteURL.substring(19);
 
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
@@ -52,18 +87,6 @@ public class FileDownloader {
                 // Get the file name from the URL
                 String fileName = downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1);
 
-                // Make a folder for download if it doesn't exist
-                String folderDownloadPath = System.getProperty("user.home") + File.separator + "Downloads";
-                Path folderPath = Path.of(folderDownloadPath);
-                if (!Files.exists(folderPath)) {
-                    try {
-                        Files.createDirectories(folderPath);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                }
-
                 // Download the file to the local machine's downloads folder
                 Path filePath = Path.of(folderDownloadPath, fileName);
                 Files.write(filePath, downloadResponse.body(), StandardOpenOption.CREATE);
@@ -74,5 +97,17 @@ public class FileDownloader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public File getFolder() {
+        return this.folder;
+    }
+
+    public String getTempDirName() {
+        return this.tempDirName;
+    }
+
+    public void setTempDirName(String newTempName) {
+        this.tempDirName = newTempName;
     }
 }
