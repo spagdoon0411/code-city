@@ -16,7 +16,8 @@ public class BuildingRendererTest {
                 new Building("Class1", 7, 16),
                 new Building("Class2", 34, 34),
                 new Building("Class3", 4, 3),
-                new Building("Class4", 1, 12)
+                new Building("Class4", 1, 12),
+                new Building("Class4", 0, 0)
         ));
 
         buildings.put("Package1", b1);
@@ -31,14 +32,17 @@ public class BuildingRendererTest {
 
         buildings.put("Package2", b2);
 
-        JFrame frame = new JFrame("Code City");
-        frame.setSize(new Dimension(1920, 1280));
-        BuildingRenderer renderer = new BuildingRenderer(buildings);
-        frame.add(renderer);
-        frame.setVisible(true);
+        View v = new View(
+                "Code City",
+                new BuildingRenderer(
+                        buildings
+                )
+        );
+
+        v.produce();
 
         // Avoid stopping test until frame is closed
-        while (frame.isVisible())
+        while (v.isVisible())
         {
             try {
                 Thread.sleep(50);

@@ -3,6 +3,9 @@ class Building {
     // How sensitive is a building's width to its number of fields?
     static int WIDTH_SCALING = 3;
 
+    static int MIN_WIDTH = 5;
+    static int MIN_HEIGHT = 5;
+
     // How sensitive is a building's height to its number of methods?
     static int HEIGHT_SCALING = 3;
 
@@ -23,13 +26,12 @@ class Building {
     }
 
     public int getHeight() {
-        return Building.HEIGHT_SCALING * this.getMethods();
+        return Building.MIN_HEIGHT + Building.HEIGHT_SCALING * this.getMethods();
     }
 
     public int getWidth() {
-        return Building.WIDTH_SCALING * this.getFields();
+        return Building.MIN_WIDTH + Building.WIDTH_SCALING * this.getFields();
     }
-
 
     public int getMethods() {
         return methods;
