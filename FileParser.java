@@ -1,12 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class FileParser{
     private File file;
     private String fStr;
-    private ArrayList<DeclaredPart> ooParts;
     public FileParser(String path){
         file = new File(path);
         try{
@@ -20,7 +18,6 @@ public class FileParser{
             System.err.println("I literally have no idea where that file is");
         }
         removeStrComments();
-        ooParts = new ArrayList<DeclaredPart>();
     }
 
 
@@ -119,44 +116,87 @@ public class FileParser{
     }
 
     /**
-     * Gets the package of a java file. If there is no package present,
+     * Gets the class name of a java file. If there is no package present,
      * returns null.
      * @return the package name as a string
      */
     public String getClassName(){
-        String packageLine = null;
-        try{
-            Scanner fs = new Scanner(file);
-            //Looking for the first occurrence of " class "
-
-            packageLine = fs.nextLine();
-            if(packageLine.startsWith("package")){
-                int stopInd = packageLine.indexOf(';');
-                packageLine = packageLine.substring(8, stopInd);
-            }else{
-                fs.close();
-                return null;
+        String[] fStrArr = fStr.split("\n");
+        for(String lineStr : fStrArr){
+            if(lineStr.trim().startsWith("public") ||
+                    lineStr.trim().startsWith("private") ||
+                    lineStr.trim().startsWith("protected")
+                    && lineStr.contains(" class ")){
+                int startInd = lineStr.indexOf(" class ")+7;
+                int endInd = startInd+1;
+                while(endInd < lineStr.length() && lineStr.charAt(endInd) != '{' && lineStr.charAt(endInd) != ' '){
+                    endInd++;
+                }
+                lineStr = lineStr.substring(startInd, endInd);
+                return lineStr;
             }
-            fs.close();
-        }catch(FileNotFoundException e){
-            System.err.println("Can't find file.");
-            e.printStackTrace();
         }
-        return packageLine;
+        return null;
     }
 
-    
-    public int getNumMethods(){
-        try{
-            Scanner fs = new Scanner(file);
-            while(fs.hasNextLine()){
-                String line = fs.
+    /**
+     * Scours the string with the file contents in it minus any 
+     * comments. Finds all methods and attributes and counts them
+     * @return an array of 2 numbers; Attributes then methods.
+     */
+    public int[] getNumAttributesAndMethods(){
+        //if opening parenthesis, increment [1]. if semicolon, increment [0].
+        int index = 0;
+        int[] attAndMeth = {0, 0};
+        while(index != -1){
+            //step 1: find an instance of public private or protected
+            int potentialStarts[] = {
+                uIndexOf(fStr, "\spublic\s", index, fStr.length()),
+                uIndexOf(fStr, "\sprivate\s", index, fStr.length()),
+                uIndexOf(fStr, "\sprotected\s", index, fStr.length())
+            };
+            index = Math.min(potentialStarts[0], Math.min(potentialStarts[1], potentialStarts[2]));
+            if(index >= fStr.length()){
+                return attAndMeth;
             }
-            fs.close();
-        }catch(FileNotFoundException e){
-            System.err.println("Can't find file.");
-            e.printStackTrace();
+            int nextClass = uIndexOf(fStr, "\sclass\s", index, fStr.length());
+            int nextEquals = uIndexOf(fStr, "=", index, fStr.length());
+            int nextOpenP = uIndexOf(fStr, "(", index, fStr.length());
+            int nextNewLn = uIndexOf(fStr, "\n", index, fStr.length());
+            int nextSemi = uIndexOf(fStr, ";", index, fStr.length());
+            //check if class comes before the next newline, if so continue
+            if(nextClass < nextNewLn){
+                index++;
+                continue;
+            }
+            //check if a semicolon or an opening parenthesis comes first
+            //if semicolon, then definitely an attribute.
+            //if opening parenthesis, check if equals comes before.
+            if(nextSemi < nextOpenP || (nextEquals < nextNewLn && nextEquals < nextOpenP)){
+                attAndMeth[0]++;
+            }
+            else{
+                attAndMeth[1]++;
+            }
+            index++;
         }
+        return attAndMeth;
+    }
+
+    /**
+     * 
+     * @return number of methods in the file
+     */
+    public int getNumMethods(){
+        return getNumAttributesAndMethods()[1];
+    }
+
+    /**
+     * 
+     * @return number of attributes in the file
+     */
+    public int getNumAttributes(){
+        return getNumAttributesAndMethods()[0];
     }
 
     /**
@@ -213,16 +253,12 @@ public class FileParser{
         return null;
     }
 
-    /**
-     * TODO!!!
-     * in java, there are 3 structures inside the class that could start
-     * with: public, private, or protected. Those are fields, methods, and constructors.
-     * To differentiate between them, methods always have parentheses somewhere before
-     * they have a semicolon.
-     * @return
-     */
-    public DeclaredPart decideOOPart
-
+    public int uIndexOf(String str, String subString, int fromIndex, int max){
+        if(str.indexOf(subString, fromIndex) == -1){
+            return max;
+        }
+        return str.indexOf(subString, fromIndex);
+    }
     //GETTER
     public File getFile(){
         return file;
