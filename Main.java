@@ -8,5 +8,7 @@ public class Main {
         String downloadPath = "C:\\Users\\Spandan\\Downloads\\codecitytestdownload";
 
         FileDownloader fd = new FileDownloader(remoteUrl, downloadPath);
+
+
     }
 }

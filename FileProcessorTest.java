@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,7 @@ class FileProcessorTest {
                 new FileInfo("Package2", "Class3", 3, 12)
         );
 
-        Map<String, List<Building>> cityMap = FileProcessor.processFiles(fileInfos);
+        Map<String, List<Building>> cityMap = FilesToBuildings.processFiles(fileInfos);
 
         // Basic checks
         assertEquals(2, cityMap.size(), "Package count mismatch");
@@ -32,7 +31,7 @@ class FileProcessorTest {
                 new FileInfo("Package2", "Class3", 3, 12)
         );
 
-        Map<String, List<Building>> cityMap = FileProcessor.processFiles(fileInfos);
+        Map<String, List<Building>> cityMap = FilesToBuildings.processFiles(fileInfos);
 
         // Check the number of buildings in each package
         assertEquals(2, cityMap.get("Package1").size(), "Building count in Package1 mismatch");
@@ -45,7 +44,7 @@ class FileProcessorTest {
                 new FileInfo("Package1", "Class1", 10, 5)
         );
 
-        Map<String, List<Building>> cityMap = FileProcessor.processFiles(fileInfos);
+        Map<String, List<Building>> cityMap = FilesToBuildings.processFiles(fileInfos);
 
         // Check attributes of a specific building
         Building building = cityMap.get("Package1").get(0);
@@ -58,7 +57,7 @@ class FileProcessorTest {
     void testProcessFilesEmptyInput() {
         List<FileInfo> fileInfos = Arrays.asList();
 
-        Map<String, List<Building>> cityMap = FileProcessor.processFiles(fileInfos);
+        Map<String, List<Building>> cityMap = FilesToBuildings.processFiles(fileInfos);
 
         // Check processing of empty input
         assertTrue(cityMap.isEmpty(), "City map should be empty for empty input");
@@ -68,7 +67,7 @@ class FileProcessorTest {
     void testProcessFilesNullInput() {
         // Check handling of null input gracefully
         Exception exception = assertThrows(NullPointerException.class, () -> {
-            FileProcessor.processFiles(null);
+            FilesToBuildings.processFiles(null);
         });
 
         String expectedMessage = "fileInfos cannot be null";
