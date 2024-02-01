@@ -1,4 +1,6 @@
 
+// FOR FUTURE USE
+
 public class DeclaredPart {
     
     public OOPart partType;
