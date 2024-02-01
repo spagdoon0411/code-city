@@ -1,11 +1,7 @@
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.OptionalInt;
-import java.util.stream.Collectors;
 import javax.swing.*;
 
 /* Displays Buildings onto screen
@@ -49,17 +45,6 @@ public class BuildingRenderer extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-//        Font font;
-//        try {
-//            font = Font.createFont(Font.TRUETYPE_FONT, new File("./fonts/JetBrainsMono-Italic-VariableFont_wght.ttf"));
-//        } catch (FontFormatException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        font.deriveFont(Font.PLAIN, 12F);
-//        g.setFont(font);
 
         int posX = RENDER_START_X;
         int posY = RENDER_START_Y;

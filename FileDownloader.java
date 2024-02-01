@@ -3,9 +3,6 @@ import java.net.*;
 import java.net.http.*;
 import java.nio.file.*;
 
-/* NOTE - this code was done last night (tuesday night), but i wanted to submit what i had in case you needed it. 
-	I will try to get junit working after my classes for the day*/
-
 /* Example usage
 // Downloads all -files- from public Github repository
         String repoUrl = "https://github.com/Grant-Thacker/TestRepository";
