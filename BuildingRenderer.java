@@ -1,7 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalInt;
+import java.util.stream.Collectors;
 import javax.swing.*;
 
 /* Displays Buildings onto screen
@@ -13,10 +16,32 @@ public class BuildingRenderer extends JComponent {
     private static int BUILDING_OFFSET_Y = 200;
     private static int RENDER_START_X = 100;
     private static int RENDER_START_Y = 300;
+
+    // Factor used in transparency coloring calculations
+    private int alphaNormalize;
+
     public Map<String, List<Building>> buildings;
     public BuildingRenderer(Map<String, List<Building>> buildings){
         this.buildings = buildings;
-    }   
+
+        alphaNormalize = 1;
+        // Determines the factor by which to normalize products by to
+        // obtain transparency coloring
+        this.buildings.values()
+                .stream()
+                .flatMap(Collection::stream)
+                .mapToInt(b -> b.getMethods() + b.getFields())
+                .max().ifPresent(max -> alphaNormalize = max);
+    }
+
+    /**
+     * Takes a building and determines what alpha value it should have
+     * (buildings with both many fields and many methods are "more important"
+     * and therefore darker)
+     */
+    private int getBuildingAlpha(Building b) {
+        return (int) (((float) (b.getFields() + b.getMethods())/((float) alphaNormalize)) * 255);
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -27,7 +52,8 @@ public class BuildingRenderer extends JComponent {
         for(String key : buildings.keySet()){
             for(Building building : buildings.get(key)){
 
-                g.setColor(Color.MAGENTA); 
+                int alpha = this.getBuildingAlpha(building);
+                g.setColor(new Color(242, 151, 39, alpha));
                 g.drawRect(posX, posY - building.getHeight(), building.getWidth(), building.getHeight());
                 g.fillRect(posX, posY - building.getHeight(), building.getWidth(), building.getHeight());
 
