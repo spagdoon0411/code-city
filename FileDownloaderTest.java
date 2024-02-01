@@ -1,12 +1,9 @@
-import org.junit.Rule;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -15,20 +12,6 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileDownloaderTest {
-
-//    @RunWith(MockitoJUnitRunner.class)
-
-//    @Rule
-//    public TemporaryFolder folder = new TemporaryFolder();
-//
-//    @Rule
-//    public TemporaryFolder folderWithSingleFile = new TemporaryFolder(){
-//        @ Override
-//        public void create() throws IOException {
-//            super.create();
-//            this.newFolder("temp_repo_dir");
-//        }
-//    };
 
     @TempDir
     File tempFolder;
