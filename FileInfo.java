@@ -12,6 +12,8 @@ class FileInfo {
         this.numberOfAttributes = numberOfAttributes;
     }
 
+    public 
+
     // Getters
     public String getPackageName() {
         return packageName;
