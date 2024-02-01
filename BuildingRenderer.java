@@ -28,15 +28,15 @@ public class BuildingRenderer extends JComponent {
             for(Building building : buildings.get(key)){
 
                 g.setColor(Color.MAGENTA); 
-                g.drawRect(posX, posY - building.height, building.width, building.height);
-                g.fillRect(posX, posY - building.height, building.width, building.height);
+                g.drawRect(posX, posY - building.getHeight(), building.getWidth(), building.getHeight());
+                g.fillRect(posX, posY - building.getHeight(), building.getWidth(), building.getHeight());
 
                 g.setColor(Color.black);
-                g.drawString(building.name, posX , posY + 20); //Arbritrary Y offsets
-                g.drawString("F:" + Integer.toString(building.methods), posX , posY + 40);
-                g.drawString("M:" + Integer.toString(building.fields), posX , posY + 60);
+                g.drawString(building.getClassName(), posX , posY + 20); //Arbritrary Y offsets
+                g.drawString("F:" + Integer.toString(building.getMethods()), posX , posY + 40);
+                g.drawString("M:" + Integer.toString(building.getFields()), posX , posY + 60);
 
-                posX += building.width + BUILDING_OFFSET_X;
+                posX += building.getWidth() + BUILDING_OFFSET_X;
             }
             posY += BUILDING_OFFSET_Y;
             posX = RENDER_START_X;

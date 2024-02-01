@@ -11,9 +11,9 @@ import java.nio.file.*;
         String repoUrl = "https://github.com/Grant-Thacker/TestRepository";
         fileDownloader.downloadFromUrl(repoUrl);
 */
-public class fileDownloader {
+public class FileDownloader {
 
-    public static void downloadFromUrl(String url){
+    public void downloadFromUrl(String url){
         url = "https://api.github.com/repos/" + url.substring(19);
 
         try {
@@ -40,7 +40,7 @@ public class fileDownloader {
             e.printStackTrace();
         }
     }
-    private static void downloadFile(HttpClient httpClient, String downloadUrl) {
+    private void downloadFile(HttpClient httpClient, String downloadUrl) {
         try {
             HttpRequest downloadRequest = HttpRequest.newBuilder()
                     .uri(URI.create(downloadUrl))
