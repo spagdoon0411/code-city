@@ -26,6 +26,14 @@ public class FileParser extends VoidVisitorAdapter<Void>{
     private String className;
     private String packageName;
 
+    /**
+     * upon initialization, the FileParser creates a list of FileInfo objects.
+     * If path refers to a Java file, only one FileInfo object is in the list and that
+     * object stores all relevant data about the class that the file represents.
+     * If the path refers to a directory, this constructor recursively calls itself
+     * on all files in the directory and then adds the fileInfos to the list.
+     * @param path the path to the Java file or directory to be analyzed
+     */
     public FileParser(String path){
         numMethods = 0;
         methods = new ArrayList<>();
@@ -105,6 +113,10 @@ public class FileParser extends VoidVisitorAdapter<Void>{
 
     //GETTERS
 
+    /**
+     * Use this function to get the FileInfo(s) for the given path
+     * @return an ArrayList of FileInfo objects that are located at the path
+     */
     public List<FileInfo> getFileInfos(){
         return infos;
     }
