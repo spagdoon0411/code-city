@@ -1,11 +1,12 @@
+package com.csc308;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FileParser{
+public class FileParserOld{
     private File file;
     private String fStr;
-    public FileParser(String path){
+    public FileParserOld(String path){
         file = new File(path);
         try{
             Scanner sc = new Scanner(file);
@@ -151,15 +152,15 @@ public class FileParser{
         while(index != -1){
             //step 1: find an instance of public private or protected
             int potentialStarts[] = {
-                uIndexOf(fStr, "\spublic\s", index, fStr.length()),
-                uIndexOf(fStr, "\sprivate\s", index, fStr.length()),
-                uIndexOf(fStr, "\sprotected\s", index, fStr.length())
+                uIndexOf(fStr, " public ", index, fStr.length()),
+                uIndexOf(fStr, " private ", index, fStr.length()),
+                uIndexOf(fStr, " protected ", index, fStr.length())
             };
             index = Math.min(potentialStarts[0], Math.min(potentialStarts[1], potentialStarts[2]));
             if(index >= fStr.length()){
                 return attAndMeth;
             }
-            int nextClass = uIndexOf(fStr, "\sclass\s", index, fStr.length());
+            int nextClass = uIndexOf(fStr, " class ", index, fStr.length());
             int nextEquals = uIndexOf(fStr, "=", index, fStr.length());
             int nextOpenP = uIndexOf(fStr, "(", index, fStr.length());
             int nextNewLn = uIndexOf(fStr, "\n", index, fStr.length());

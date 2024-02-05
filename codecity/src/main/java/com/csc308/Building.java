@@ -1,3 +1,4 @@
+package com.csc308;
 class Building {
 
     // How sensitive is a building's width to its number of fields?
