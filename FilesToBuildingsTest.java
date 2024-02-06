@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileProcessorTest {
+class FilesToBuildingsTest {
 
     @Test
     void testProcessFilesBasic() {
