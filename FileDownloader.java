@@ -10,8 +10,6 @@ import java.nio.file.*;
 */
 public class FileDownloader {
 
-    String tempDirName;
-
     private File folder;
 
     private String remoteURL;
@@ -27,10 +25,12 @@ public class FileDownloader {
     public FileDownloader(String remoteURL, String directoryPath) {
         this.folderDownloadPath = directoryPath;
         this.remoteURL = remoteURL;
+    }
 
+    public void downloadFiles() {
         // Make a folder for download if it doesn't exist
         // String folderDownloadPath = System.getProperty("user.home") + File.separator + "Downloads";
-        Path folderPath = Path.of(folderDownloadPath);
+        Path folderPath = Path.of(this.folderDownloadPath);
         if (!Files.exists(folderPath)) {
             try {
                 Files.createDirectories(folderPath);
@@ -40,7 +40,7 @@ public class FileDownloader {
             }
         }
 
-        this.folder = new File(directoryPath);
+        this.folder = new File(this.folderDownloadPath);
 
         this.downloadFromUrl();
     }
@@ -100,11 +100,4 @@ public class FileDownloader {
         return this.folder;
     }
 
-    public String getTempDirName() {
-        return this.tempDirName;
-    }
-
-    public void setTempDirName(String newTempName) {
-        this.tempDirName = newTempName;
-    }
 }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.File;
 import java.util.*;
 import java.util.List;
 
@@ -22,7 +23,14 @@ public class Main {
 
         // FileDownloader fd = new FileDownloader(remoteUrl, downloadPath);
         FileDownloader fd = new FileDownloader(spantest, spanDownload);
+        fd.downloadFiles();
+        File filedir = fd.getFolder();
 
+        /* TODO: Call file parser to obtain list of FileInfos */
+
+        /* TODO: Call FilesToBuildings to obtain mapping from packages to buildings */
+
+        /* TODO: replace with call to FilesToBuildings.ProcessFiles() */
         Map<String, List<Building>> buildings = new HashMap<>();
 
         View v = new View(

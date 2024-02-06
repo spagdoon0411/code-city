@@ -23,6 +23,7 @@ public class FileDownloaderTest {
 
         FileDownloader fd = new FileDownloader(remoteUrl, tempFolder.getAbsolutePath()
                 + File.pathSeparator + "repo");
+        fd.downloadFiles();
         File downloadDirectory = fd.getFolder();
 
         System.out.println(tempFolder.exists());
