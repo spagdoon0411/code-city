@@ -1,9 +1,14 @@
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 public class BuildingRendererTest {
+
+    static int frameWidth = 800;
+    static int frameHeight = 600;
 
     @Test
     void testBuildingRenderer() {
@@ -30,17 +35,19 @@ public class BuildingRendererTest {
 
         buildings.put("Package2", b2);
 
-        View v = new View(
-                "Code City",
-                new BuildingRenderer(
-                        buildings
-                )
+        BuildingRenderer br = new BuildingRenderer(
+                buildings
         );
 
-        v.produce();
+        JFrame frame = new JFrame("BuildingRenderer Test");
+
+        frame.add(br);
+        frame.setSize(new Dimension(frameWidth, frameHeight));
+
+        frame.setVisible(true);
 
         // Avoid stopping test until frame is closed
-        while (v.isVisible())
+        while (frame.isVisible())
         {
             try {
                 Thread.sleep(50);

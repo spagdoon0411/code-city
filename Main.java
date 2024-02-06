@@ -7,10 +7,10 @@ public class Main {
     {
 
         String spantest = "https://github.com/spagdoon0411/code-city-test-remote";
-        String remoteUrl = JOptionPane.showInputDialog("GitHub repository:");
+        // String remoteUrl = JOptionPane.showInputDialog("GitHub repository:");
 
         String spanDownload = "/Users/spandansuthar/Desktop";
-        String downloadPath = JOptionPane.showInputDialog("Absolute download path:");
+        // String downloadPath = JOptionPane.showInputDialog("Absolute download path:");
 
         // FileDownloader fd = new FileDownloader(remoteUrl, downloadPath);
         FileDownloader fd = new FileDownloader(spantest, spanDownload);
@@ -21,5 +21,7 @@ public class Main {
                 "Code City",
                 new BuildingRenderer(buildings)
         );
+
+        v.produce();
     }
 }
