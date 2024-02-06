@@ -2,17 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class View extends JFrame {
-    final static int frameWidth = 800;
-    final static int frameHeight = 600;
+    int frameWidth;
+    int frameHeight;
 
-    final static int canvasWidth = 9000;
-    final static int canvasHeight = 9000;
+    int canvasWidth;
+    int canvasHeight;
 
     BuildingRenderer renderer;
 
-    public View(String title, BuildingRenderer br) {
+    public View(String title,
+                BuildingRenderer br,
+                int frameWidth,
+                int frameHeight,
+                int canvasWidth,
+                int canvasHeight) {
         super(title);
         this.renderer = br;
+        this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
     }
 
     public void produce() {

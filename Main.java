@@ -3,6 +3,14 @@ import java.util.*;
 import java.util.List;
 
 public class Main {
+
+    final static int FRAME_WIDTH = 800;
+    final static int FRAME_HEIGHT = 600;
+
+    final static int CANVAS_WIDTH = 9000;
+
+    final static int CANVAS_HEIGHT = 9000;
+
     public static void main(String[] args)
     {
 
@@ -19,7 +27,11 @@ public class Main {
 
         View v = new View(
                 "Code City",
-                new BuildingRenderer(buildings)
+                new BuildingRenderer(buildings),
+                FRAME_WIDTH,
+                FRAME_HEIGHT,
+                CANVAS_WIDTH,
+                CANVAS_HEIGHT
         );
 
         v.produce();
