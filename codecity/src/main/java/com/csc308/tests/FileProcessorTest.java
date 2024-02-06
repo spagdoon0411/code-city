@@ -1,9 +1,11 @@
+package com.csc308.tests;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
+import com.csc308.*;
 
 class FileProcessorTest {
 

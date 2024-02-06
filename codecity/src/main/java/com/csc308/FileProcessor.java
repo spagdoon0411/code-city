@@ -1,6 +1,7 @@
+package com.csc308;
 import java.util.*;
 
-public class FilesToBuildings {
+public class FileProcessor {
     /**
      * Processes a list of FileInfo objects and groups them into buildings by package.
      *

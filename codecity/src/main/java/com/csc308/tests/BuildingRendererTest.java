@@ -1,7 +1,10 @@
+package com.csc308.tests;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.List;
+
+import com.csc308.*;
 
 public class BuildingRendererTest {
 
