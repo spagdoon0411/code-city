@@ -1,4 +1,4 @@
-
+package com.csc308.tests;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.csc308.*;
 
 public class FileDownloaderTest {
 

@@ -1,4 +1,6 @@
+package com.csc308;
 import javax.swing.*;
+
 import java.util.*;
 import java.util.List;
 

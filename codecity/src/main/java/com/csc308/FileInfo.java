@@ -1,4 +1,5 @@
-class FileInfo {
+package com.csc308;
+public class FileInfo {
     String packageName;
     String className;
     int numberOfMethods;
@@ -11,6 +12,7 @@ class FileInfo {
         this.numberOfMethods = numberOfMethods;
         this.numberOfAttributes = numberOfAttributes;
     }
+
 
     // Getters
     public String getPackageName() {
@@ -27,5 +29,13 @@ class FileInfo {
 
     public int getNumberOfAttributes() {
         return numberOfAttributes;
+    }
+
+    @Override
+    public String toString(){
+        return "Class name: "+className+"\n"+
+                "Package name: "+packageName+"\n"+
+                "# Methods: "+numberOfMethods+"\n"+
+                "# Attributes: "+numberOfAttributes+"";
     }
 }

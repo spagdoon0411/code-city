@@ -1,4 +1,5 @@
-class Building {
+package com.csc308;
+public class Building {
 
     // How sensitive is a building's width to its number of fields?
     static int WIDTH_SCALING = 3;
