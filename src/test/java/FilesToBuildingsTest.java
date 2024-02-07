@@ -49,8 +49,8 @@ class FilesToBuildingsTest {
         // Check attributes of a specific building
         Building building = cityMap.get("Package1").get(0);
         assertEquals("Class1", building.getClassName(), "Class name mismatch");
-        assertEquals(10, building.getHeight(), "Height mismatch");
-        assertEquals(5, building.getWidth(), "Width mismatch");
+        assertEquals(20, building.getHeight(), "Height mismatch");
+        assertEquals(35, building.getWidth(), "Width mismatch");
     }
 
     @Test

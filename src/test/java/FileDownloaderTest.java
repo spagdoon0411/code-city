@@ -20,7 +20,6 @@ public class FileDownloaderTest {
     void testDownloads() throws IOException {
         String remoteUrl = "https://github.com/spagdoon0411/code-city-test-remote";
 
-
         FileDownloader fd = new FileDownloader(remoteUrl, tempFolder.getAbsolutePath()
                 + File.pathSeparator + "repo");
         fd.downloadFiles();
