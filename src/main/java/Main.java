@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.util.*;
 import java.util.List;
 
+import static java.lang.System.exit;
+
 public class Main {
 
     final static int FRAME_WIDTH = 800;
@@ -13,11 +15,15 @@ public class Main {
 
     public static void main(String[] args)
     {
-
         // String recommendedTest = "https://github.com/spagdoon0411/code-city-test-remote";
         String remoteUrl = JOptionPane.showInputDialog("GitHub repository:");
 
         String downloadPath = JOptionPane.showInputDialog("Absolute download path:");
+
+
+        if(remoteUrl == null || downloadPath == null) {
+            exit(0);
+        }
 
         // FileDownloader fd = new FileDownloader(remoteUrl, downloadPath);
         FileDownloader fd = new FileDownloader(remoteUrl, downloadPath);
