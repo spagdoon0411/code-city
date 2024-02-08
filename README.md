@@ -12,8 +12,8 @@ Code City downloads a folder of single files from a remote GitHub repository, th
 
 ## Team Members
 
-Spandan Suthar - Integration and display
-Tommy Choboter - File parser
-Grant Thacker - Git repository interaction
-Matty Witt - File information to building mapping
-Eric Berber - Building renderer
+- Spandan Suthar - Integration and display
+- Tommy Choboter - File parser
+- Grant Thacker - Git repository interaction
+- Matty Witt - File information to building mapping
+- Eric Berber - Building renderer
